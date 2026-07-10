@@ -1,0 +1,660 @@
+/* src/styles/About.css */
+.about-page {
+  background: var(--off-white);
+}
+
+/* Hero Section */
+.about-hero {
+  padding: 160px 0 80px;
+  background: var(--primary-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 50%, rgba(139, 115, 85, 0.1) 0%, transparent 60%),
+    radial-gradient(circle at 70% 80%, rgba(192, 57, 43, 0.05) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--white);
+}
+
+.about-hero-badge {
+  display: inline-block;
+  padding: 6px 24px;
+  background: rgba(139, 115, 85, 0.2);
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  color: var(--secondary-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.about-hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.about-hero-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Profile Section */
+.profile-section {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.profile-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-image-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.profile-image-border {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+  position: relative;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--primary-dark);
+}
+
+.profile-experience-badge {
+  position: absolute;
+  bottom: 20px;
+  right: -10px;
+  padding: 16px 20px;
+  background: var(--primary-dark);
+  border: 2px solid var(--secondary);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.profile-experience-badge .badge-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--secondary-light);
+  line-height: 1;
+}
+
+.profile-experience-badge .badge-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.profile-content {
+  padding: 20px 0;
+}
+
+.profile-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+}
+
+.profile-role {
+  font-size: 1.1rem;
+  color: var(--secondary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.profile-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+.profile-location svg {
+  color: var(--secondary);
+}
+
+.profile-bio {
+  margin-bottom: 32px;
+}
+
+.profile-bio p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  font-size: 1.05rem;
+}
+
+.profile-bio strong {
+  color: var(--primary-dark);
+}
+
+.profile-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.profile-actions .btn-primary,
+.profile-actions .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Mission Section */
+.mission-section {
+  padding: 80px 0;
+  background: var(--off-white);
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.mission-card {
+  padding: 40px;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.mission-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.mission-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 115, 85, 0.1);
+  border-radius: 50%;
+  color: var(--secondary);
+  margin-bottom: 20px;
+}
+
+.mission-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+}
+
+.mission-card p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.mission-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mission-card ul li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mission-card ul li:last-child {
+  border-bottom: none;
+}
+
+.mission-card ul li svg {
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+/* Values Grid */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.value-card {
+  padding: 30px 24px;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--secondary);
+}
+
+.value-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  background: rgba(139, 115, 85, 0.1);
+  border-radius: 50%;
+  color: var(--secondary);
+}
+
+.value-card h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+}
+
+.value-card p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* Research Section */
+.research-section {
+  padding: 80px 0;
+  background: var(--white);
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.research-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.research-bullet {
+  flex-shrink: 0;
+}
+
+.bullet-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--secondary);
+}
+
+.research-item span {
+  font-weight: 500;
+}
+
+/* Organizations Section */
+.organizations-section {
+  padding: 80px 0;
+  background: var(--off-white);
+}
+
+.organizations-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.organization-card {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.organization-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.org-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 115, 85, 0.1);
+  border-radius: 50%;
+  color: var(--secondary);
+  flex-shrink: 0;
+}
+
+.org-content {
+  flex: 1;
+}
+
+.org-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 2px;
+}
+
+.org-role {
+  font-size: 0.95rem;
+  color: var(--secondary);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.org-period {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.org-period svg {
+  color: var(--secondary);
+}
+
+.org-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Impact Section */
+.impact-section {
+  padding: 80px 0;
+  background: var(--primary-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.impact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(139, 115, 85, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(192, 57, 43, 0.05) 0%, transparent 40%);
+}
+
+.impact-content {
+  position: relative;
+  z-index: 1;
+}
+
+.impact-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.impact-header .section-badge {
+  background: rgba(139, 115, 85, 0.2);
+  color: var(--secondary-light);
+}
+
+.impact-header .section-title {
+  color: var(--white);
+}
+
+.impact-header .section-title::after {
+  background: var(--secondary);
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.impact-card {
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: var(--transition);
+}
+
+.impact-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-5px);
+}
+
+.impact-number {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--secondary-light);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.impact-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.impact-card p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .profile-image-container {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+@media (max-width: 992px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .profile-content {
+    text-align: center;
+  }
+
+  .profile-location {
+    justify-content: center;
+  }
+
+  .profile-actions {
+    justify-content: center;
+  }
+
+  .profile-image-container {
+    width: 300px;
+    height: 300px;
+  }
+
+  .profile-experience-badge {
+    right: 10px;
+  }
+
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .research-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .organizations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-hero-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 120px 0 60px;
+  }
+
+  .about-hero-title {
+    font-size: 2.4rem;
+  }
+
+  .about-hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .profile-image-container {
+    width: 250px;
+    height: 250px;
+  }
+
+  .profile-title {
+    font-size: 2.2rem;
+  }
+
+  .profile-experience-badge {
+    padding: 12px 16px;
+  }
+
+  .profile-experience-badge .badge-number {
+    font-size: 1.5rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .research-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .impact-number {
+    font-size: 2.5rem;
+  }
+
+  .mission-card {
+    padding: 30px;
+  }
+
+  .organization-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero-title {
+    font-size: 1.8rem;
+  }
+
+  .profile-image-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile-title {
+    font-size: 1.8rem;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-number {
+    font-size: 2.5rem;
+  }
+
+  .profile-actions .btn-primary,
+  .profile-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mission-card ul li {
+    font-size: 0.95rem;
+  }
+}
