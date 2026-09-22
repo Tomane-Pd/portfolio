@@ -1,6 +1,6 @@
 // src/pages/ProjectDetail.jsx
 import React, { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   ArrowLeft,
@@ -22,30 +22,34 @@ import {
   Folder,
   Eye,
   Download,
-  RefreshCw
+  RefreshCw,
+  Code2
 } from 'lucide-react'
-import { projectsData } from '../data/projectsData'
+import { loadProjects } from '../utils/projectsStore'
+import { NotebookViewer, CodeBlock } from '../components/NotebookViewer'
 import SEO from '../components/SEO'
 import '../styles/ProjectDetail.css'
 
 const ProjectDetail = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [activeTab, setActiveTab] = useState('overview')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const activeTab = searchParams.get('tab') || 'overview'
+  const [activeNotebook, setActiveNotebook] = useState(0)
   const [project, setProject] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // Procura primeiro nos projetos salvos (Admin), depois nos projetos padrão
+  // A aba activa fica no URL (?tab=code) para se poder partilhar o link directo para o código
+  const setActiveTab = (tab) => {
+    const next = new URLSearchParams(searchParams)
+    if (tab === 'overview') next.delete('tab')
+    else next.set('tab', tab)
+    setSearchParams(next, { replace: true })
+  }
+
+  // Projetos padrão (src/data/projectsData.js) + alterações feitas no Admin
   const loadProject = () => {
-    try {
-      const saved = localStorage.getItem('portfolio_projects')
-      const parsed = saved ? JSON.parse(saved) : null
-      const pool = parsed && parsed.length > 0 ? parsed : projectsData
-      const found = pool.find(p => p.id === id) || projectsData.find(p => p.id === id)
-      setProject(found || null)
-    } catch (e) {
-      setProject(projectsData.find(p => p.id === id) || null)
-    }
+    setProject(loadProjects().find(p => p.id === id) || null)
     setLoading(false)
   }
 
@@ -64,6 +68,8 @@ const ProjectDetail = () => {
       window.removeEventListener('contentUpdated', handleStorageChange)
     }
   }, [id])
+
+  useEffect(() => { setActiveNotebook(0) }, [id])
 
   if (loading) {
     return (
@@ -98,11 +104,34 @@ const ProjectDetail = () => {
     visible: { opacity: 1, y: 0 }
   }
 
+  const notebooks = project.notebooks || []
+  const hasCode = notebooks.length > 0 || !!project.code
+
   const tabs = [
     { id: 'overview', label: 'Overview', icon: <Eye size={18} /> },
+    ...(hasCode ? [{ id: 'code', label: 'Code', icon: <Code2 size={18} /> }] : []),
     { id: 'details', label: 'Details', icon: <FolderOpen size={18} /> },
     { id: 'materials', label: 'Materials', icon: <Folder size={18} /> }
   ]
+
+  // Materiais: downloads dos notebooks + materiais definidos no projeto
+  const allMaterials = [
+    ...notebooks.map(nb => ({
+      type: 'Jupyter notebook',
+      label: nb.label,
+      icon: 'FileCode',
+      url: `/notebooks/${nb.file}.ipynb`,
+      download: true
+    })),
+    ...(project.materials || [])
+  ]
+
+  const openCode = () => {
+    setActiveTab('code')
+    setTimeout(() => {
+      document.querySelector('.project-detail-content')?.scrollIntoView({ behavior: 'smooth' })
+    }, 50)
+  }
 
   const iconMap = {
     Code: <Code size={20} />,
@@ -151,6 +180,12 @@ const ProjectDetail = () => {
                 </span>
               </div>
               <div className="project-detail-actions">
+                {hasCode && (
+                  <button type="button" onClick={openCode} className="btn-primary">
+                    <Code2 size={20} />
+                    View Code
+                  </button>
+                )}
                 {project.github && (
                   <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-secondary">
                     <Github size={20} />
@@ -236,6 +271,40 @@ const ProjectDetail = () => {
               </motion.div>
             )}
 
+            {activeTab === 'code' && hasCode && (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+                transition={{ duration: 0.5 }}
+                className="tab-content"
+              >
+                {notebooks.length > 0 ? (
+                  <div className={`code-tab-layout ${notebooks.length === 1 ? 'single' : ''}`}>
+                    {notebooks.length > 1 && (
+                      <nav className="notebook-list" aria-label="Notebooks">
+                        <span className="notebook-list-title">{notebooks.length} notebooks</span>
+                        {notebooks.map((nb, idx) => (
+                          <button
+                            key={nb.file}
+                            type="button"
+                            className={idx === activeNotebook ? 'active' : ''}
+                            onClick={() => setActiveNotebook(idx)}
+                          >
+                            <FileCode size={16} />
+                            {nb.label}
+                          </button>
+                        ))}
+                      </nav>
+                    )}
+                    <NotebookViewer file={notebooks[Math.min(activeNotebook, notebooks.length - 1)].file} />
+                  </div>
+                ) : (
+                  <CodeBlock code={project.code} title={`${project.id}.py`} />
+                )}
+              </motion.div>
+            )}
+
             {activeTab === 'details' && (
               <motion.div
                 initial="hidden"
@@ -288,13 +357,17 @@ const ProjectDetail = () => {
                 className="tab-content"
               >
                 <div className="materials-grid">
-                  {project.materials?.map((material, idx) => (
-                    <a 
-                      key={idx} 
-                      href={material.url || '#'} 
+                  {allMaterials.length === 0 && (
+                    <p className="no-materials">No materials available for this project.</p>
+                  )}
+                  {allMaterials.map((material, idx) => (
+                    <a
+                      key={idx}
+                      href={material.url || '#'}
                       className="material-card"
                       target="_blank"
                       rel="noopener noreferrer"
+                      {...(material.download ? { download: '' } : {})}
                     >
                       <div className="material-icon">{iconMap[material.icon] || <FileText size={20} />}</div>
                       <div className="material-info">
@@ -303,7 +376,7 @@ const ProjectDetail = () => {
                       </div>
                       <Download size={18} className="material-download" />
                     </a>
-                  )) || <p className="no-materials">No materials available for this project.</p>}
+                  ))}
                 </div>
               </motion.div>
             )}

@@ -1,6 +1,6 @@
 // src/context/AdminContext.jsx
 import React, { createContext, useState, useContext, useEffect } from 'react'
-import { projectsData } from '../data/projectsData'
+import { mergeProjects, markProjectDeleted } from '../utils/projectsStore'
 
 const AdminContext = createContext()
 
@@ -38,16 +38,15 @@ export const AdminProvider = ({ children }) => {
   const loadAllData = () => {
     // Projetos (semeia com os projetos padrão na primeira vez, para o Admin editar/excluir os mesmos que os visitantes veem)
     const savedProjects = localStorage.getItem('portfolio_projects')
+    // mergeProjects garante que projetos novos do código aparecem mesmo com dados antigos guardados
     if (savedProjects) {
       try {
-        const parsed = JSON.parse(savedProjects)
-        setProjects(parsed && parsed.length > 0 ? parsed : projectsData)
+        setProjects(mergeProjects(JSON.parse(savedProjects)))
       } catch (e) {
-        setProjects(projectsData)
+        setProjects(mergeProjects([]))
       }
     } else {
-      setProjects(projectsData)
-      localStorage.setItem('portfolio_projects', JSON.stringify(projectsData))
+      setProjects(mergeProjects([]))
     }
 
     // Arquivos
@@ -161,13 +160,14 @@ export const AdminProvider = ({ children }) => {
   }
 
   const updateProject = (id, updatedData) => {
-    const updated = projects.map(p => p.id === id ? { ...p, ...updatedData } : p)
+    const updated = projects.map(p => p.id === id ? { ...p, ...updatedData, editedAt: new Date().toISOString() } : p)
     saveProjectsAndSync(updated)
     showNotification('Projeto atualizado com sucesso!', 'success')
   }
 
   const deleteProject = (id) => {
     const updated = projects.filter(p => p.id !== id)
+    markProjectDeleted(id)
     saveProjectsAndSync(updated)
     const newFiles = { ...uploadedFiles }
     delete newFiles[id]

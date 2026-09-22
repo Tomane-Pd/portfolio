@@ -706,3 +706,35 @@
   padding: 40px 0;
   font-size: 1rem;
 }
+/* ===== Contagem nas categorias e selo "Code" ===== */
+.category-count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 7px;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  background: rgba(139, 115, 85, 0.12);
+}
+
+.category-btn.active .category-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.project-code-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--white);
+  background: rgba(26, 26, 46, 0.75);
+  border: 1px solid rgba(160, 132, 94, 0.6);
+  backdrop-filter: blur(4px);
+}

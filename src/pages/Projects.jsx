@@ -12,9 +12,10 @@ import {
   List,
   Layers,
   X,
-  RefreshCw
+  RefreshCw,
+  Code2
 } from 'lucide-react'
-import { projectsData } from '../data/projectsData'
+import { loadProjects as loadStoredProjects } from '../utils/projectsStore'
 import SEO from '../components/SEO'
 import '../styles/Projects.css'
 
@@ -25,23 +26,9 @@ const Projects = () => {
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(true)
 
-  // Carregar dados do localStorage ou usar os projetos padrão (src/data/projectsData.js)
+  // Projetos padrão (src/data/projectsData.js) + alterações feitas no Admin
   const loadProjects = () => {
-    try {
-      const saved = localStorage.getItem('portfolio_projects')
-      if (saved) {
-        const parsed = JSON.parse(saved)
-        if (parsed && parsed.length > 0) {
-          setProjects(parsed)
-        } else {
-          setProjects(projectsData)
-        }
-      } else {
-        setProjects(projectsData)
-      }
-    } catch (e) {
-      setProjects(projectsData)
-    }
+    setProjects(loadStoredProjects())
     setLoading(false)
   }
 
@@ -62,15 +49,18 @@ const Projects = () => {
     }
   }, [])
 
-  // Categorias disponíveis
+  // Categorias: ordem preferida + qualquer categoria nova criada no Admin, com contagem
+  const categoryOrder = ['Machine Learning', 'Data Science', 'Data Engineering', 'Automation', 'Platform', 'Research']
+  const countFor = (cat) => projects.filter(p => p.category === cat).length
+  const extraCategories = [...new Set(projects.map(p => p.category).filter(Boolean))]
+    .filter(cat => !categoryOrder.includes(cat))
   const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'Data Engineering', label: 'Data Engineering' },
-    { id: 'Data Science', label: 'Data Science' },
-    { id: 'Machine Learning', label: 'Machine Learning' },
-    { id: 'Platform', label: 'Platform' },
-    { id: 'Research', label: 'Research' }
+    { id: 'all', label: 'All Projects', count: projects.length },
+    ...[...categoryOrder, ...extraCategories]
+      .filter(cat => countFor(cat) > 0)
+      .map(cat => ({ id: cat, label: cat, count: countFor(cat) }))
   ]
+  const hasCode = (project) => (project.notebooks && project.notebooks.length > 0) || !!project.code
 
   // Filtrar projetos
   const filteredProjects = projects.filter(project => {
@@ -113,7 +103,7 @@ const Projects = () => {
     <div className="projects-page">
       <SEO
         title="Projects"
-        description="A showcase of data science, AI, and MEAL projects including PMEAL Explorer 360, a data integration pipeline, and life expectancy analysis in R."
+        description="Data science, machine learning, automation and MEAL projects by Tomane Mateus Tomane, with the full Python code: LSTM stock price prediction, Olympic medals prediction, geospatial analysis and more."
       />
       <section className="projects-hero">
         <div className="projects-hero-background"></div>
@@ -172,6 +162,7 @@ const Projects = () => {
                     onClick={() => setActiveCategory(category.id)}
                   >
                     {category.label}
+                    <span className="category-count">{category.count}</span>
                   </button>
                 ))}
               </div>
@@ -224,6 +215,12 @@ const Projects = () => {
                         e.target.src = '/images/projects/placeholder.svg'
                       }}
                     />
+                    {hasCode(project) && (
+                      <div className="project-code-badge">
+                        <Code2 size={14} />
+                        Code
+                      </div>
+                    )}
                     <div className="project-status">
                       <span className={`status-badge ${project.status?.toLowerCase() || 'active'}`}>
                         {project.status || 'Active'}
