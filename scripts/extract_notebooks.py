@@ -32,11 +32,15 @@ NOTEBOOKS = {
     "pythonize-005-encrypt-file": "🐍 Pythonize com Tomane_Proteger arquivo.ipynb.ipynb",
     "pythonize-006-pdf-password": "🐍 Pythonize com Tomane_Proteger com palavra passe.ipynb.ipynb",
     "pythonize-007-qr-code": "🐍 Pythonize com Tomane_Criar QR code.ipynb.ipynb",
+    "pythonize-009-duplicate-files": "Encontrar ficheiros duplicados com Python - Pythonize com Tomane 009.ipynb",
+    "pythonize-010-zip-folder": "Compactar uma pasta em ZIP com Python - Pythonize com Tomane 8.ipynb",
+    "pythonize-011-agronomy": "Agronomia com Python - Pythonize com Tomane 12.ipynb",
+    "pythonize-012-soil-maps": "Criar mapas de pH e carbono orgânico do solo - Pythonize com Tomane 12.ipynb",
 }
 
 ANSI = re.compile(r"\x1b\[[0-9;]*[A-Za-z]")
 MAX_LINES, MAX_CHARS = 25, 2500
-INSTALL = re.compile(r"^\s*!?\s*pip\s+install", re.M)
+INSTALL = re.compile(r"^\s*[!%]?\s*pip\s+install", re.M)
 
 
 def joined(v):

@@ -322,17 +322,17 @@ print("Planilha consolidada com sucesso!")`,
     title: 'Pythonize com Tomane — Python Tips Series',
     category: 'Automation',
     image: '/images/projects/pythonize.svg',
-    description: 'A series of short, practical Python tutorials (in Portuguese) that automate everyday tasks: downloading videos, removing image backgrounds, converting and protecting files, renaming files and creating QR codes.',
+    description: 'A series of short, practical Python tutorials (in Portuguese) that automate everyday tasks and apply Python to real fields: downloading videos, removing image backgrounds, converting, protecting and compressing files, finding duplicates, creating QR codes, and agronomy and soil mapping.',
     problem: 'Many people spend time on repetitive computer tasks that a few lines of Python can solve. This series shows how, step by step, for beginners.',
     objectives: [
       'Teach Python through small, useful, real-life scripts',
       'Keep each tutorial to three steps: install, import, run',
       'Share knowledge about Python, AI, Data Science and Automation'
     ],
-    methodology: 'Each episode is a Jupyter notebook with a short explanation and ready-to-use code: #001 download YouTube videos (yt-dlp), #002 remove image backgrounds (rembg), #003 convert images to PDF (Pillow), #004 rename files in bulk (os), #005 encrypt any file (cryptography/Fernet), #006 password-protect a PDF (pypdf), #007 create QR codes (qrcode).',
-    technologies: ['Python', 'yt-dlp', 'rembg', 'Pillow', 'cryptography', 'pypdf', 'qrcode', 'Jupyter'],
+    methodology: 'Each episode is a Jupyter notebook with a short explanation and ready-to-use code: #001 download YouTube videos (yt-dlp), #002 remove image backgrounds (rembg), #003 convert images to PDF (Pillow), #004 rename files in bulk (os), #005 encrypt any file (cryptography/Fernet), #006 password-protect a PDF (pypdf), #007 create QR codes (qrcode), #009 find duplicate files by content (hashlib/SHA-256), #010 compress a folder to ZIP (shutil), #011 agronomy dashboard with disease progress, climate and soil data (NumPy, Matplotlib), #012 soil pH and organic carbon maps with IDW interpolation.',
+    technologies: ['Python', 'yt-dlp', 'rembg', 'Pillow', 'cryptography', 'pypdf', 'qrcode', 'hashlib', 'NumPy', 'Matplotlib', 'Jupyter'],
     results: [
-      '7 tutorials published',
+      '11 tutorials published',
       'Ready-to-use scripts for everyday automation',
       'Beginner-friendly content in Portuguese'
     ],
@@ -349,7 +349,11 @@ print("Planilha consolidada com sucesso!")`,
       { label: '#004 · Rename files in bulk', file: 'pythonize-004-rename-files' },
       { label: '#005 · Encrypt any file', file: 'pythonize-005-encrypt-file' },
       { label: '#006 · Password-protect a PDF', file: 'pythonize-006-pdf-password' },
-      { label: '#007 · Create a QR code', file: 'pythonize-007-qr-code' }
+      { label: '#007 · Create a QR code', file: 'pythonize-007-qr-code' },
+      { label: '#009 · Find duplicate files', file: 'pythonize-009-duplicate-files' },
+      { label: '#010 · Compress a folder to ZIP', file: 'pythonize-010-zip-folder' },
+      { label: '#011 · Agronomy with Python', file: 'pythonize-011-agronomy' },
+      { label: '#012 · Soil pH & carbon maps', file: 'pythonize-012-soil-maps' }
     ],
     materials: []
   }
