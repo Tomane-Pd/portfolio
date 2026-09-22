@@ -36,6 +36,11 @@ NOTEBOOKS = {
     "pythonize-010-zip-folder": "Compactar uma pasta em ZIP com Python - Pythonize com Tomane 8.ipynb",
     "pythonize-011-agronomy": "Agronomia com Python - Pythonize com Tomane 12.ipynb",
     "pythonize-012-soil-maps": "Criar mapas de pH e carbono orgânico do solo - Pythonize com Tomane 12.ipynb",
+    "pythonize-021-market-prices": "Pythonize com Tomane 021 - Comparar precos no mercado.ipynb",
+    "pythonize-022-pantry-dates": "Pythonize com Tomane 022 - Organizar datas da despensa.ipynb",
+    "pythonize-023-web-scraping": "Pythonize com Tomane 023 - Web scraping.ipynb",
+    "pythonize-024-book-prices": "Pythonize com Tomane 024 - Comparar precos de livros.ipynb",
+    "pythonize-026-review-calendar": "Pythonize com Tomane 026 - Calendario de revisoes.ipynb",
 }
 
 ANSI = re.compile(r"\x1b\[[0-9;]*[A-Za-z]")
